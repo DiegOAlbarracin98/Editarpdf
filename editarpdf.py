@@ -101,7 +101,6 @@ st.title("Editor de Facturas en PDF")
 uploaded_file = st.file_uploader("Sube una factura en PDF", type=["pdf"])
 new_logo = st.file_uploader("Sube el nuevo logo (opcional)", type=["png", "jpg"])
 export_type = st.text_input("Nuevo tipo de exportación", "EXW")
-new_company_name = st.text_input("Nueva razón social", "INDUSTRIAS FLIV SAS")
 invoice_value_code = st.text_input("Valor en número (USD, con centavos opcional)")
 gastos_value = st.text_input("Valor de GASTOS USD")
 
@@ -110,8 +109,8 @@ if invoice_value_code:
 else:
     invoice_value_text = ""
 
-if uploaded_file and export_type and new_company_name and invoice_value_text and gastos_value:
+if uploaded_file and export_type and invoice_value_text and gastos_value:
     if st.button("Modificar Factura"):
-        modified_pdf = modificar_factura(uploaded_file.read(), export_type, new_logo, new_company_name, invoice_value_text, gastos_value)
+        modified_pdf = modificar_factura(uploaded_file.read(), export_type, new_logo, invoice_value_text, gastos_value)
         st.download_button("Descargar Factura Modificada", modified_pdf, "factura_modificada.pdf", "application/pdf")
 
